@@ -27,6 +27,23 @@ function MascotasPage() {
         }
     }
 
+    const deleteMascotas = async (id) => {
+
+        const confirmar = window.confirm("¿Está seguro de que desea eliminar esta mascota?");
+
+        if (!confirmar) {
+            return;
+        }
+
+        try {
+            await mascotasApi.delete(`mascotas/${id}/`);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            fetchMascotas();
+        }
+    }
+
     useEffect(() => {
         fetchMascotas();
     }, [])
@@ -35,7 +52,7 @@ function MascotasPage() {
         <>
             <h1>Pagina Mascotas</h1>
 
-            <MascotasList lista={mascotasList} onAdd={addMascotas} />
+            <MascotasList lista={mascotasList} onAdd={addMascotas} onDelete={deleteMascotas}/>
 
             <Outlet />
         </>
