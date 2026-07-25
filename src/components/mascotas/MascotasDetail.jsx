@@ -47,6 +47,10 @@ function MascotasDetail() {
                     <p>{mascota?.descripcion}</p>
                     <p>Edad: {mascota?.edad}</p>
                     <p>Raza: {mascota?.raza}</p>
+                    <p>Estado: {mascota?.estado}</p>
+                    <p>Tipo de animal: {mascota?.tipo_animal}</p>
+                    <p>Sexo: {mascota?.sexo}</p>
+                    <p>Tamaño: {mascota?.tamano}</p>
                     <ComentariosList 
                         comentarios={mascota?.comentarios}
                         onEliminarComentario={eliminarComentario}
