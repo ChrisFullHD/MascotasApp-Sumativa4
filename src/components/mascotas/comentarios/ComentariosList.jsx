@@ -1,4 +1,4 @@
-function ComentariosList({ comentarios }) {
+function ComentariosList({ comentarios, onEliminarComentario }) {
     if(!comentarios || comentarios.length === 0) {
         return (
             <p>No hay Comentarios para esta Mascota</p>
@@ -16,6 +16,13 @@ function ComentariosList({ comentarios }) {
                     <small>
                         {new Date(comentario.fecha_creacion).toLocaleString()}
                     </small>
+
+                    <br />
+                    <button
+                        onClick={() => onEliminarComentario(comentario.id)}
+                    >
+                        Eliminar
+                    </button>
                     <hr />
                 </div> 
             ))

@@ -24,6 +24,18 @@ function MascotasDetail() {
         fetchMascotaDetail();
     }, []);
 
+    const eliminarComentario = async (comentarioID) => {
+        try {
+
+            await mascotasApi.delete(
+                `comentarios/${comentarioID}/`
+            )
+
+            fetchMascotaDetail()
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <div>
             {fetchError ? (
@@ -35,7 +47,10 @@ function MascotasDetail() {
                     <p>{mascota?.descripcion}</p>
                     <p>Edad: {mascota?.edad}</p>
                     <p>Raza: {mascota?.raza}</p>
-                    <ComentariosList comentarios={mascota?.comentarios} />
+                    <ComentariosList 
+                        comentarios={mascota?.comentarios}
+                        onEliminarComentario={eliminarComentario}
+                    />
                     <ComentariosForm
                         mascotaID={id}
                         onComentarioAgregado={fetchMascotaDetail}
