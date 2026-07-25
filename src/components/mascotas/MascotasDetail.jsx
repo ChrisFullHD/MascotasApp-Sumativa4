@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import mascotasApi from "../../api/api";
 import { useEffect, useState } from "react";
 import ComentariosList from "./comentarios/ComentariosList";
-
+import ComentariosForm from "./comentarios/ComentariosForm";
 function MascotasDetail() {
     const { id } = useParams();
     console.log(id);
@@ -36,6 +36,10 @@ function MascotasDetail() {
                     <p>Edad: {mascota?.edad}</p>
                     <p>Raza: {mascota?.raza}</p>
                     <ComentariosList comentarios={mascota?.comentarios} />
+                    <ComentariosForm
+                        mascotaID={id}
+                        onComentarioAgregado={fetchMascotaDetail}
+                    />
                 </>
             )}
         </div>
