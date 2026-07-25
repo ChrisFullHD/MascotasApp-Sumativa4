@@ -27,6 +27,18 @@ function MascotasPage() {
         }
     }
 
+    const updateEstado = async (id, estado) => {
+        try {
+            await mascotasApi.patch(`mascotas/${id}/`, {
+                estado: estado
+            });
+
+            fetchMascotas();
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const deleteMascotas = async (id) => {
 
         const confirmar = window.confirm("¿Está seguro de que desea eliminar esta mascota?");
@@ -52,7 +64,7 @@ function MascotasPage() {
         <>
             <h1>Pagina Mascotas</h1>
 
-            <MascotasList lista={mascotasList} onAdd={addMascotas} onDelete={deleteMascotas}/>
+            <MascotasList lista={mascotasList} onAdd={addMascotas} onDelete={deleteMascotas} onUpdate={updateEstado}/>
 
             <Outlet />
         </>
