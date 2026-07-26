@@ -35,10 +35,13 @@ function MascotasCrearPage() {
 
 
     return (
+        <div className="container-fluid bg-success bg-opacity-25 p-4 min-vh-100">
+
         <div className="container my-4">
 
             <MascotasForm onAdd={addMascotas} errores={errores}/>
         </div>
+    </div>
     );
 }
 
