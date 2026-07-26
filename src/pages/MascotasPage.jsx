@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 
 function MascotasPage() {
     const [mascotasList, setMascotasList] = useState([]);
+    const [errores, setErrores] = useState({});
 
     const fetchMascotas = async () => {
         try {
@@ -21,7 +22,16 @@ function MascotasPage() {
             const response = await mascotasApi.post('mascotas/', mascota);
             console.log(response);
         } catch (error) {
-            console.log(error);
+            
+            console.log(error.response?.status);
+            console.log(error.response?.data);
+            console.log(error.message);
+
+            setErrores(error.response?.data ?? {
+                general: ["Error de conexión con el servidor"]
+            });
+
+
         } finally {
             fetchMascotas();
         }
@@ -64,7 +74,7 @@ function MascotasPage() {
         <>
             <h1>Pagina Mascotas</h1>
 
-            <MascotasList lista={mascotasList} onAdd={addMascotas} onDelete={deleteMascotas} onUpdate={updateEstado}/>
+            <MascotasList lista={mascotasList} onAdd={addMascotas} onDelete={deleteMascotas} onUpdate={updateEstado} errores={errores}/>
 
             <Outlet />
         </>

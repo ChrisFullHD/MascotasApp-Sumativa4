@@ -5,7 +5,7 @@ import mascotasApi from "../../api/api";
 import MascotasForm from "./MascotasForm";
 
 
-function MascotasList({ lista, onAdd, onDelete, onUpdate }) {
+function MascotasList({ lista, onAdd, onDelete, onUpdate, errores }) {
 
     const [estados, setEstados] = useState([]);
     const [selectedEstados, setSelectedEstados] = useState({});
@@ -36,7 +36,7 @@ function MascotasList({ lista, onAdd, onDelete, onUpdate }) {
         <>
             <h2>Lista mascotas</h2>
 
-            <MascotasForm onAdd={onAdd} />
+            <MascotasForm onAdd={onAdd} errores={errores} />
 
             {
                 lista.map(m =>

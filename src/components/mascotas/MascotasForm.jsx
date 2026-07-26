@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import mascotasApi from "../../api/api";
 
-function MascotasForm({ onAdd }) {
+function MascotasForm({ onAdd, errores }) {
     const [estados, setEstados] = useState([]);
     const [tipoMascota, setTipoMascota] = useState([]);
     const [sexo, setSexo] = useState([]);
@@ -25,6 +25,7 @@ function MascotasForm({ onAdd }) {
             setTipoMascota(response.data.tipo_animal);
             setSexo(response.data.sexo);
             setTamano(response.data.tamano);
+            
         } catch (error) {
             console.log(error)
         }
@@ -58,9 +59,27 @@ function MascotasForm({ onAdd }) {
             <label>Nombre:
                 <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} />
             </label>
+
+            {
+                errores.nombre && (
+                    <p style={{ color: "red" }}>
+                        {errores.nombre[0]}
+                    </p>
+                )
+            }
+
             <label>Descripcion:
                 <textarea value={descripcion} onChange={(e) => setDescripcion(e.target.value)}></textarea>
             </label>
+
+            {
+                errores.descripcion && (
+                    <p style={{ color: "red" }}>
+                        {errores.descripcion[0]}
+                    </p>
+                )
+            }            
+
             <label>Edad:
                 <input type="number" value={edad} onChange={(e) => setEdad(e.target.value)} />
             </label>
@@ -102,6 +121,14 @@ function MascotasForm({ onAdd }) {
             <label>Imagen:
                 <input type="file" onChange={(e) => setImagen(e.target.files[0])} />
             </label>
+
+            {
+                errores.imagen && (
+                    <p style={{ color: "red" }}>
+                        {errores.imagen[0]}
+                    </p>
+                )
+            }            
 
             <button type="submit">Guardar</button>
         </form>
