@@ -30,26 +30,63 @@ function MascotasList({ lista, onAdd, onDelete, onUpdate, errores }) {
         }));
     };
 
+    const obtenerLabelEstado = (valorEstado) => {
+        const estado = estados.find((e) => e.value === valorEstado);
+        return estado ? estado.label : valorEstado;
+    };
+
+    const obtenerColorEstado = (estado) => {
+        switch (estado) {
+            case "adoptada":
+                return "success";
+
+            case "en_adopcion":
+                return "primary";
+
+            case "encontrada":
+                return "success";
+
+            case "perdida":
+                return "danger";
+
+            default:
+                return "secondary";
+        }
+    };
+
 
 
     return (
-        <>
-            <h2>Lista mascotas</h2>
+        <div className="container my-4">
+
+            <h2 className="text-center mb-4">
+                Lista mascotas
+            </h2>
 
             <MascotasForm onAdd={onAdd} errores={errores} />
+
+            <div className="row g-4">
 
             {
                 lista.map(m =>
                 (
-                    <div key={m.id}>
-                        <h3>{m.nombre}</h3>
-                        <img src={m.imagen} />
-                        <p>{m.descripcion}</p>
+                    <div key={m.id} className="col-md-6 col-lg-4">
+
+                        <div className="card h-100 shadow">
+                            
+                        <h3 className="card-title text-center mb-3 mt-3">{m.nombre}</h3>
+                        <img src={m.imagen} className="card-img-top" alt={m.nombre} style={{ height: "250px", objectFit: "scale-down" }}/>
+                        <div className="card-body">
+                        <p className="text-center">{m.descripcion}</p>
                         <p>Edad: {m.edad}</p>
                         <p>Raza: {m.raza}</p>
-                        <p>Estado: {m.estado}</p>
+                        <p>Estado: 
+                            <span className={`badge bg-${obtenerColorEstado(m.estado)} ms-2`}>
+                            {obtenerLabelEstado(m.estado)}
+                            </span>
+                        </p>
 
-                        <select
+                        <select className="form-select mb-3"
                             value={selectedEstados[m.id]?? m.estado}
                             onChange={(e) => handleEstadoChange(m.id, e.target.value)}>
                                 
@@ -63,20 +100,31 @@ function MascotasList({ lista, onAdd, onDelete, onUpdate, errores }) {
 
                             </select>
 
-                        <Link to={`${m.id}`}>Ver mascota</Link>
-                        
-                        <button onClick={() => onDelete(m.id)}>Eliminar</button>
+                        <div className="d-flex gap-2 mt-3">
 
-                        <button onClick={() => onUpdate(m.id,selectedEstados[m.id] ?? m.estado)}>
-                            Actualizar Estado
-                        </button>
+                            <Link to={`${m.id}`} className="btn btn-primary flex-fill" >Detalles</Link>
+                            
+                            <button className="btn btn-danger flex-fill" onClick={() => onDelete(m.id)}>Eliminar</button>
+
+                        </div>
+
+                        <div className="d-grid mt-3">
+                            <button className="btn btn-success btn-sm" onClick={() => onUpdate(m.id,selectedEstados[m.id] ?? m.estado)}>
+                                Actualizar Estado
+                            </button>
+                        </div>
+
+                        </div>
+                    </div>
                     </div>
                 )
                 )
 
             }
+
+            </div>
            
-        </>
+        </div>
     )
 }
 
