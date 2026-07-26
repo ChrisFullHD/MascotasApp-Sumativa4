@@ -71,10 +71,15 @@ function MascotasPage() {
     }, [])
 
     return (
-        <div className="container my-4">
+        <div className="container-fluid bg-success bg-success bg-opacity-25 p-4 min-vh-100">
 
-            <div className="d-flex justify-content-between align-items-center mb-4">
-            <h1>Mascotas</h1>
+            <div className="container py-4">
+                <div className="text-center mb-5">
+            <h1 className="display-4 fw-bold text-success">Página de Mascotas</h1>
+
+            <p className="text-muted fs-5">
+                Encuentra un nuevo compañero o registra una mascota.
+            </p>
 
             <Link to="/mascotas/crear" className="btn btn-success">
                 Registrar mascota
@@ -85,6 +90,7 @@ function MascotasPage() {
 
             <Outlet />
             
+        </div>
         </div>
     )
 }

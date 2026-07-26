@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import mascotasApi from "../../api/api";
+import { Link } from "react-router-dom";
 
 function MascotasForm({ onAdd, errores }) {
     const [estados, setEstados] = useState([]);
@@ -258,13 +259,17 @@ function MascotasForm({ onAdd, errores }) {
 
                             </div>
 
-                            <div className="d-grid">
+                            <div className="d-flex flex-column gap-2">
                                 <button
                                     type="submit"
                                     className="btn btn-success"
                                 >
                                     Guardar Mascota
                                 </button>
+
+                                <Link to="/mascotas" className="btn btn-outline-secondary">
+                                        Volver al listado
+                                </Link>
                             </div>
 
                         </form>

@@ -9,8 +9,10 @@ function App() {
   return (
     <>
       <Router>
-        <nav>
-          <NavLink to={"/mascotas"}>Mascotas</NavLink>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-success shadow">
+          <div className="container">
+          <NavLink className="navbar-brand fw-bold" to={"/mascotas"}>MascotasApp</NavLink>
+          </div>
         </nav>
 
         <Routes>
