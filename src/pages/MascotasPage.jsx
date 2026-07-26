@@ -70,9 +70,18 @@ function MascotasPage() {
         try {
             await mascotasApi.delete(`mascotas/${id}/`);
         } catch (error) {
-            console.log(error);
+            console.log(error.response?.status);
+            console.log(error.response?.data);
+            console.log(error.message);
+
+            if (error.response?.status === 404) {
+                alert("La mascota no fue encontrada.");
+            } else {
+                alert("Ha ocurrido un error al eliminar la mascota.");
+            }
+
         } finally {
-            fetchMascotas();
+            await fetchMascotas();
         }
     }
 
