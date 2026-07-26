@@ -67,6 +67,7 @@ function MascotasDetail() {
                     <ComentariosList 
                         comentarios={mascota?.comentarios}
                         onEliminarComentario={eliminarComentario}
+                        onComentarioActualizado={fetchMascotaDetail}
                     />
                     <ComentariosForm
                         mascotaID={id}
