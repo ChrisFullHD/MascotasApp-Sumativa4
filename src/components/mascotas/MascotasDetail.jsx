@@ -5,20 +5,27 @@ import ComentariosList from "./comentarios/ComentariosList";
 import ComentariosForm from "./comentarios/ComentariosForm";
 function MascotasDetail() {
     const { id } = useParams();
-    console.log(id);
     const [fetchError, setFetchError] = useState(false);
     const [mascota, setMascota] = useState(null);
 
     const fetchMascotaDetail = async () => {
         try {
             const response = await mascotasApi.get(`mascotas/${id}/`);
-            console.log(response.data);
             setMascota(response.data);
+            setFetchError(false);
         } catch (error) {
-            console.log(error);
-            setFetchError(true);
+
+            console.log(error.response?.status);
+            console.log(error.response?.data);
+            console.log(error.message);
+
+            if (error.response?.status === 404) {
+                setFetchError(true);
+            } else {
+                alert("Ha ocurrido un error al obtener la mascota.");
+            }
         }
-    }
+    }   
 
     useEffect(() => {
         fetchMascotaDetail();
