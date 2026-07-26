@@ -36,9 +36,7 @@ function MascotasCrearPage() {
 
     return (
         <div className="container my-4">
-            <h2 className="text-center mb-4">
-                Registrar Mascota
-            </h2>
+
             <MascotasForm onAdd={addMascotas} errores={errores}/>
         </div>
     );

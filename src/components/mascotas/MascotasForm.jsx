@@ -72,80 +72,211 @@ function MascotasForm({ onAdd, errores }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
-            <label>Nombre:
-                <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} />
-            </label>
+    <div className="container my-4">
+        <div className="row justify-content-center">
+            <div className="col-md-8">
 
-            {
-                errores.nombre && (
-                    <p style={{ color: "red" }}>
-                        {errores.nombre[0]}
-                    </p>
-                )
-            }
+                <div className="card shadow">
 
-            <label>Descripcion:
-                <textarea value={descripcion} onChange={(e) => setDescripcion(e.target.value)}></textarea>
-            </label>
+                    <div className="card-header bg-success text-white text-center">
+                        <h3>Registrar Mascota</h3>
+                    </div>
 
-            {
-                errores.descripcion && (
-                    <p style={{ color: "red" }}>
-                        {errores.descripcion[0]}
-                    </p>
-                )
-            }            
+                    <div className="card-body">
 
-            <label>Edad:
-                <input type="number" value={edad} onChange={(e) => setEdad(e.target.value)} />
-            </label>
-            <label>Raza:
-                <input type="text" value={raza} onChange={(e) => setRaza(e.target.value)} />
-            </label>
-            <label>Estado:
-                <select value={selectedEstado} onChange={(e) => setEstado(e.target.value)}>
-                    {
-                        estados.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
-                    }
-                </select>
-            </label>
-            <label>Tipo Animal:
-                <select value={selectedTipoMascota} onChange={(e) => setTipoMascotaSeleccionada(e.target.value)}>
-                    {
-                        tipoMascota.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
-                    }
-                </select>
-            </label>
-            <label>Sexo:
-                <select value={selectedSexo} onChange={(e) => setSexoSeleccionado(e.target.value)}>
-                    {
-                        sexo.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
-                    }
-                </select>
-            </label>
-            <label>Tamaño:
-                <select value={selectedTamano} onChange={(e) => setTamanoSeleccionado(e.target.value)}>
-                    {
-                        tamano.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
-                    }
-                </select>
-            </label>
-            <label>Imagen:
-                <input type="file" onChange={(e) => setImagen(e.target.files[0])} />
-            </label>
+                        <form onSubmit={handleSubmit} encType="multipart/form-data">
 
-            {
-                errores.imagen && (
-                    <p style={{ color: "red" }}>
-                        {errores.imagen[0]}
-                    </p>
-                )
-            }            
+                            <div className="mb-3">
+                                <label className="form-label">Nombre</label>
 
-            <button type="submit">Guardar</button>
-        </form>
-    )
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={nombre}
+                                    onChange={(e) => setNombre(e.target.value)}
+                                />
+
+                                {errores.nombre && (
+                                    <div className="text-danger">
+                                        {errores.nombre[0]}
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="mb-3">
+                                <label className="form-label">Imagen</label>
+
+                                <input
+                                    type="file"
+                                    className="form-control"
+                                    onChange={(e) => setImagen(e.target.files[0])}
+                                />
+
+                                {errores.imagen && (
+                                    <div className="text-danger">
+                                        {errores.imagen[0]}
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="mb-3">
+                                <label className="form-label">Descripción</label>
+
+                                <textarea
+                                    className="form-control"
+                                    rows="3"
+                                    value={descripcion}
+                                    onChange={(e) => setDescripcion(e.target.value)}
+                                ></textarea>
+
+                                {errores.descripcion && (
+                                    <div className="text-danger">
+                                        {errores.descripcion[0]}
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="row">
+
+                                <div className="col-md-6 mb-3">
+                                    <label className="form-label">Edad</label>
+
+                                    <input
+                                        type="number"
+                                        className="form-control"
+                                        value={edad}
+                                        onChange={(e) => setEdad(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="col-md-6 mb-3">
+                                    <label className="form-label">Raza</label>
+
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        value={raza}
+                                        onChange={(e) => setRaza(e.target.value)}
+                                    />
+                                </div>
+
+                            </div>
+
+                            <div className="row">
+
+                                <div className="col-md-6 mb-3">
+
+                                    <label className="form-label">
+                                        Estado
+                                    </label>
+
+                                    <select
+                                        className="form-select"
+                                        value={selectedEstado}
+                                        onChange={(e) => setEstado(e.target.value)}
+                                    >
+                                        {
+                                            estados.map(e => (
+                                                <option key={e.value} value={e.value}>
+                                                    {e.label}
+                                                </option>
+                                            ))
+                                        }
+                                    </select>
+
+                                </div>
+
+                                <div className="col-md-6 mb-3">
+
+                                    <label className="form-label">
+                                        Tipo Animal
+                                    </label>
+
+                                    <select
+                                        className="form-select"
+                                        value={selectedTipoMascota}
+                                        onChange={(e) => setTipoMascotaSeleccionada(e.target.value)}
+                                    >
+                                        {
+                                            tipoMascota.map(e => (
+                                                <option key={e.value} value={e.value}>
+                                                    {e.label}
+                                                </option>
+                                            ))
+                                        }
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div className="row">
+
+                                <div className="col-md-6 mb-3">
+
+                                    <label className="form-label">
+                                        Sexo
+                                    </label>
+
+                                    <select
+                                        className="form-select"
+                                        value={selectedSexo}
+                                        onChange={(e) => setSexoSeleccionado(e.target.value)}
+                                    >
+                                        {
+                                            sexo.map(e => (
+                                                <option key={e.value} value={e.value}>
+                                                    {e.label}
+                                                </option>
+                                            ))
+                                        }
+                                    </select>
+
+                                </div>
+
+                                <div className="col-md-6 mb-3">
+
+                                    <label className="form-label">
+                                        Tamaño
+                                    </label>
+
+                                    <select
+                                        className="form-select"
+                                        value={selectedTamano}
+                                        onChange={(e) => setTamanoSeleccionado(e.target.value)}
+                                    >
+                                        {
+                                            tamano.map(e => (
+                                                <option key={e.value} value={e.value}>
+                                                    {e.label}
+                                                </option>
+                                            ))
+                                        }
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div className="d-grid">
+                                <button
+                                    type="submit"
+                                    className="btn btn-success"
+                                >
+                                    Guardar Mascota
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+)
 }
 
 export default MascotasForm;
