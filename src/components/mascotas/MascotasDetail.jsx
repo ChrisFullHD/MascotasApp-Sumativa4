@@ -7,6 +7,7 @@ function MascotasDetail() {
     const { id } = useParams();
     const [fetchError, setFetchError] = useState(false);
     const [mascota, setMascota] = useState(null);
+    const [mensajeError, setMensajeError] = useState("");
 
     const fetchMascotaDetail = async () => {
         try {
@@ -46,11 +47,25 @@ function MascotasDetail() {
 
             fetchMascotaDetail()
         } catch (error) {
-            console.log(error)
+            console.log(error.response?.status);
+            console.log(error.response?.data);
+
+            if (error.response?.status ===  404) {
+                setMensajeError("El comentario ya no existe")
+            } else {
+                setMensajeError("No fue posible eliminar el comentario")
+            }
         }
     }
     return (
         <div>
+
+            {mensajeError && (
+                <div className="alert alert-danger">
+                    {mensajeError}
+                </div>
+            )}
+
             {fetchError ? (
                 <p>404 - Mascota no encontrada</p>
             ) : (
@@ -64,6 +79,7 @@ function MascotasDetail() {
                     <p>Tipo de animal: {mascota?.tipo_animal}</p>
                     <p>Sexo: {mascota?.sexo}</p>
                     <p>Tamaño: {mascota?.tamano}</p>
+
                     <ComentariosList 
                         comentarios={mascota?.comentarios}
                         onEliminarComentario={eliminarComentario}

@@ -4,10 +4,17 @@ function ComentariosForm({ mascotaID, onComentarioAgregado }) {
 
     const [autor, setAutor] = useState("")
     const [contenido, setContenido] = useState("")
+    const [mensajeError, setMensajeError] = useState("")
     
     const handleSubmit = async (e) => {
 
         e.preventDefault()
+        setMensajeError("")
+
+        if (!autor.trim() || !contenido.trim()) {
+            setMensajeError("Debe completar todos los campos")
+            return
+        }
 
         try {
             await mascotasApi.post(
@@ -21,13 +28,21 @@ function ComentariosForm({ mascotaID, onComentarioAgregado }) {
 
             setAutor("")
             setContenido("")
+            setMensajeError("")
 
             onComentarioAgregado()
 
         } catch (error) {
-            console.log(error)
             console.log(error.response?.status)
             console.log(error.response?.data)
+
+            if(error.response?.status === 400) {
+                setMensajeError("Debe completar correctamente todos los campos")
+            } else if (error.response?.status === 404) {
+                setMensajeError("La mascota no existe")
+            } else {
+                setMensajeError("Ocurrió un error inesperado")
+            }
         }
     }
     return (
@@ -52,6 +67,12 @@ function ComentariosForm({ mascotaID, onComentarioAgregado }) {
                     onChange={(e) => setContenido(e.target.value)}
                 />
             </div>
+
+            {mensajeError && (
+                <div className="alert alert-danger mt-3">
+                    {mensajeError}
+                </div>
+            )}
 
             <button type="submit">
                 Agregar Comentario
