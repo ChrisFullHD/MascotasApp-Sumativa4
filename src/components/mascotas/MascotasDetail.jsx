@@ -32,6 +32,12 @@ function MascotasDetail() {
     }, []);
 
     const eliminarComentario = async (comentarioID) => {
+        const confirmar = window.confirm("¿Está seguro de que desea eliminar este comentario?");
+
+        if (!confirmar) {
+            return;
+        }
+        
         try {
 
             await mascotasApi.delete(
