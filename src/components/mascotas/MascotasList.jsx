@@ -63,7 +63,7 @@ function MascotasList({ lista, onAdd, onDelete, onUpdate, errores }) {
                 Lista mascotas
             </h2>
 
-            <MascotasForm onAdd={onAdd} errores={errores} />
+            {/*<MascotasForm onAdd={onAdd} errores={errores} /> */}
 
             <div className="row g-4">
 

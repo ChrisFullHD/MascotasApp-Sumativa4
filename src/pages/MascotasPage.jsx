@@ -1,7 +1,7 @@
 import MascotasList from "../components/mascotas/MascotasList";
 import { useEffect, useState } from "react";
 import mascotasApi from "../api/api";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 function MascotasPage() {
     const [mascotasList, setMascotasList] = useState([]);
@@ -90,13 +90,21 @@ function MascotasPage() {
     }, [])
 
     return (
-        <>
-            <h1>Pagina Mascotas</h1>
+        <div className="container my-4">
+
+            <div className="d-flex justify-content-between align-items-center mb-4">
+            <h1>Mascotas</h1>
+
+            <Link to="/mascotas/crear" className="btn btn-success">
+                Registrar mascota
+            </Link>
+        </div>
 
             <MascotasList lista={mascotasList} onAdd={addMascotas} onDelete={deleteMascotas} onUpdate={updateEstado} errores={errores}/>
 
             <Outlet />
-        </>
+            
+        </div>
     )
 }
 
