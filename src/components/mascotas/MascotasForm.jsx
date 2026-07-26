@@ -25,6 +25,23 @@ function MascotasForm({ onAdd, errores }) {
             setTipoMascota(response.data.tipo_animal);
             setSexo(response.data.sexo);
             setTamano(response.data.tamano);
+
+            if (response.data.estado.length > 0) {
+                setEstado(response.data.estado[0].value);
+            }
+
+            if (response.data.tipo_animal.length > 0) {
+                setTipoMascotaSeleccionada(response.data.tipo_animal[0].value);
+            }
+
+            if (response.data.sexo.length > 0) {
+                setSexoSeleccionado(response.data.sexo[0].value);
+            }
+
+            if (response.data.tamano.length > 0) {
+                setTamanoSeleccionado(response.data.tamano[0].value);
+            }
+
             
         } catch (error) {
             console.log(error)
@@ -88,7 +105,6 @@ function MascotasForm({ onAdd, errores }) {
             </label>
             <label>Estado:
                 <select value={selectedEstado} onChange={(e) => setEstado(e.target.value)}>
-                    <option value={""} >Sin estado</option>
                     {
                         estados.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                     }
@@ -96,7 +112,6 @@ function MascotasForm({ onAdd, errores }) {
             </label>
             <label>Tipo Animal:
                 <select value={selectedTipoMascota} onChange={(e) => setTipoMascotaSeleccionada(e.target.value)}>
-                    <option value={""} >Sin estado</option>
                     {
                         tipoMascota.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                     }
@@ -104,7 +119,6 @@ function MascotasForm({ onAdd, errores }) {
             </label>
             <label>Sexo:
                 <select value={selectedSexo} onChange={(e) => setSexoSeleccionado(e.target.value)}>
-                    <option value={""} >Sin estado</option>
                     {
                         sexo.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                     }
@@ -112,7 +126,6 @@ function MascotasForm({ onAdd, errores }) {
             </label>
             <label>Tamaño:
                 <select value={selectedTamano} onChange={(e) => setTamanoSeleccionado(e.target.value)}>
-                    <option value={""} >Sin estado</option>
                     {
                         tamano.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                     }
