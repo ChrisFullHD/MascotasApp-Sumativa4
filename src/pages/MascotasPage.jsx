@@ -45,7 +45,17 @@ function MascotasPage() {
 
             fetchMascotas();
         } catch (error) {
-            console.log(error)
+            console.log(error.response?.status);
+            console.log(error.response?.data);
+            console.log(error.message);
+
+            if (error.response?.status === 400) {
+                alert("No fue posible actualizar el estado de la mascota.");
+            } else if (error.response?.status === 404) {
+                alert("La mascota no fue encontrada.");
+            } else {
+                alert("Ha ocurrido un error al actualizar la mascota.");
+            }
         }
     }
 
