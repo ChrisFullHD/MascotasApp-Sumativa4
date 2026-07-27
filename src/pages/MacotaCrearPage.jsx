@@ -1,7 +1,7 @@
 import MascotasForm from "../components/mascotas/MascotasForm";
 import mascotasApi from "../api/api";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function MascotasCrearPage() {
 
