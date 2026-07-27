@@ -108,10 +108,14 @@ function MascotasList({ lista, onDelete, onUpdate }) {
 
                         </div>
 
-                        <div className="d-grid mt-3">
+                        <div className="d-grid gap-2 mt-3">
                             <button className="btn btn-success btn-sm" onClick={() => onUpdate(m.id,selectedEstados[m.id] ?? m.estado)}>
                                 Actualizar Estado
                             </button>
+
+                            <Link to={`${m.id}/editar`} className="btn btn-warning">
+                                Editar
+                            </Link>
                         </div>
 
                         </div>
