@@ -70,25 +70,72 @@ function MascotasDetail() {
                 <p>404 - Mascota no encontrada</p>
             ) : (
                 <>
-                    <h2>{mascota?.nombre}</h2>
-                    <img src={mascota?.imagen} alt={mascota?.nombre} />
-                    <p>{mascota?.descripcion}</p>
-                    <p>Edad: {mascota?.edad}</p>
-                    <p>Raza: {mascota?.raza}</p>
-                    <p>Estado: {mascota?.estado}</p>
-                    <p>Tipo de animal: {mascota?.tipo_animal}</p>
-                    <p>Sexo: {mascota?.sexo}</p>
-                    <p>Tamaño: {mascota?.tamano}</p>
+                    <div className="container mt-4">
+                        <div className="card shadow-lg border-0">
+                            <div className="row g-0">
+                                <div className="col-md-5">
+                                    <img src={mascota?.imagen} alt={mascota?.nombre}
+                                        className="card-img-top"
+                                        style={{height: "300px", objectFit: "scale-down"}}
+                                    />
+                                </div>
+                                <div className="col-md-7">
+                                    <div className="card-body">
+                                        <h2 className="card-title">
+                                            {mascota?.nombre}
+                                        </h2>
+                                        <span className="badge bg-success mb-3">
+                                            {mascota?.estado}
+                                        </span>
+                                        <p className="card-text">
+                                            {mascota?.descripcion}
+                                        </p>
 
-                    <ComentariosList 
-                        comentarios={mascota?.comentarios}
-                        onEliminarComentario={eliminarComentario}
-                        onComentarioActualizado={fetchMascotaDetail}
-                    />
-                    <ComentariosForm
-                        mascotaID={id}
-                        onComentarioAgregado={fetchMascotaDetail}
-                    />
+                                        <hr />
+
+                                        <div className="row">
+                                            <div className="col-6">
+                                                <strong>Edad: </strong> {mascota?.edad}
+                                            </div>
+                                            <div className="col-6">
+                                                <strong>Raza: </strong> {mascota?.raza}
+                                            </div>
+                                            <div className="col-6 mt-2">
+                                                <strong>Sexo: </strong> {mascota?.sexo}
+                                            </div>
+                                            <div className="col-6 mt-2">
+                                                <strong>Tamaño: </strong> {mascota?.tamano}
+                                            </div>
+                                            <div className="col-6 mt-2">
+                                                <strong>Tipo: </strong> {mascota?.tipo_animal}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="mt-5">
+                        <ComentariosList
+                            comentarios={mascota?.comentarios}
+                            onEliminarComentario={eliminarComentario}
+                            onComentarioActualizado={fetchMascotaDetail}
+                        />
+                    </div>
+
+                    <div className="card shadow-sm mt-4">
+                        <div className="card-body">
+                            <h4 className="mb-3">
+                                Agregar Comentario
+                            </h4>
+
+                            <ComentariosForm
+                                mascotaID={id}
+                                onComentarioAgregado={fetchMascotaDetail}
+                            />
+                        </div>
+                    </div>
                 </>
             )}
         </div>
