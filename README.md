@@ -1,18 +1,98 @@
-# React + Vite
+# MascotasApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web desarrollada en React que permite gestionar mascotas mediante una API REST. El sistema permite registrar mascotas, visualizar sus detalles, actualizar su información, eliminar registros y administrar comentarios asociados a cada mascota.
 
-Currently, two official plugins are available:
+# Distribución del trabajo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+El desarrollo del proyecto se realizó de manera colaborativa utilizando GitHub.
 
-## React Compiler
+Las principales responsabilidades se distribuyeron de la siguiente forma:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Desarrollo del módulo de mascotas (CRUD, vista de detalle, edición, manejo de errores y diseño).
+- Desarrollo del módulo de comentarios (crear, listar y eliminar comentarios).
 
-## Expanding the ESLint configuration
+# Tecnologías utilizadas
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- React Router DOM
+- Axios
+- Bootstrap 5
+- Vite
+- JavaScript
+- HTML5
+- CSS3
 
-a
+# Instalación del proyecto
+
+1. Clonar el repositorio:
+
+```bash
+git clone https://github.com/ChrisFullHD/MascotasApp-Sumativa4.git
+```
+
+2. Ingresar a la carpeta del proyecto:
+
+```bash
+cd mascotas-front
+```
+
+3. Instalar las dependencias:
+
+```bash
+npm install
+```
+
+4. Ejecutar el proyecto:
+
+```bash
+npm run dev
+```
+
+5. Abrir el navegador en la dirección indicada por Vite (por ejemplo):
+
+```
+http://localhost:5173
+```
+
+---
+
+# Funcionalidades
+
+El proyecto permite:
+
+- Visualizar el listado de mascotas.
+- Registrar una nueva mascota.
+- Visualizar el detalle de una mascota.
+- Editar información de una mascota.
+- Actualizar el estado de una mascota.
+- Eliminar mascotas.
+- Crear comentarios.
+- Eliminar comentarios.
+- Manejo básico de errores provenientes de la API.
+
+---
+
+# Buenas prácticas
+
+Durante el desarrollo se utilizaron:
+
+- Commits atómicos y descriptivos.
+- Repositorio compartido en GitHub.
+- ESLint para revisión del código.
+
+Se corrigieron las advertencias relacionadas con variables e importaciones sin uso. Las advertencias restantes corresponden a recomendaciones de optimización de React (`react-hooks/set-state-in-effect`), las cuales no afectan el funcionamiento de la aplicación.
+
+---
+
+# Uso de Inteligencia Artificial
+
+Durante el desarrollo del proyecto se utilizó ChatGPT (OpenAI) como herramienta de apoyo para:
+
+- Resolver dudas sobre React.
+- Implementar operaciones CRUD.
+- Mejorar la estructura del código.
+- Implementar manejo de errores.
+- Diseñar la interfaz utilizando Bootstrap.
+- Analizar advertencias generadas por ESLint.
+
+La implementación, integración y validación del proyecto fueron realizadas por los integrantes del equipo utilizando estas sugerencias como apoyo durante el desarrollo.
