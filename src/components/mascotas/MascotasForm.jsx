@@ -72,6 +72,27 @@ function MascotasForm({ onAdd, errores }) {
         onAdd(formData);
     }
 
+    const traducirError = (mensaje) => {
+        switch (mensaje) {
+            case "This field may not be blank.":
+                return "Este campo no puede estar vacío.";
+
+            case "The submitted data was not a file. Check the encoding type on the form.":
+                return "Debe seleccionar una imagen.";
+
+            case "This field may not be blank.":
+                return "Este campo no puede estar vacío."
+
+            default:
+                return mensaje;
+        }
+    };
+
+
+
+
+
+
     return (
     <div className="container my-4">
         <div className="row justify-content-center">
@@ -99,7 +120,7 @@ function MascotasForm({ onAdd, errores }) {
 
                                 {errores.nombre && (
                                     <div className="text-danger">
-                                        {errores.nombre[0]}
+                                        {traducirError(errores.nombre[0])}
                                     </div>
                                 )}
                             </div>
@@ -115,7 +136,7 @@ function MascotasForm({ onAdd, errores }) {
 
                                 {errores.imagen && (
                                     <div className="text-danger">
-                                        {errores.imagen[0]}
+                                        {traducirError(errores.imagen[0])}
                                     </div>
                                 )}
                             </div>
@@ -132,7 +153,7 @@ function MascotasForm({ onAdd, errores }) {
 
                                 {errores.descripcion && (
                                     <div className="text-danger">
-                                        {errores.descripcion[0]}
+                                        {traducirError(errores.descripcion[0])}
                                     </div>
                                 )}
                             </div>
