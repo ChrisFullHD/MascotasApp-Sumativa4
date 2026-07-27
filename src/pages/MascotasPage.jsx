@@ -5,14 +5,18 @@ import { Link, Outlet } from "react-router-dom";
 
 function MascotasPage() {
     const [mascotasList, setMascotasList] = useState([]);
+    const [errorConexion, setErrorConexion] = useState(false);
 
     const fetchMascotas = async () => {
         try {
             const response = await mascotasApi.get('mascotas/');
             console.log(response.data);
             setMascotasList(response.data);
+            setErrorConexion(false);
         } catch (error) {
             console.log(error);
+
+            setErrorConexion(true);
         }
     }
 
@@ -86,7 +90,36 @@ function MascotasPage() {
             </Link>
         </div>
 
-            <MascotasList lista={mascotasList} onDelete={deleteMascotas} onUpdate={updateEstado} />
+            {
+    errorConexion ? (
+
+        <div className="alert alert-danger text-center">
+
+            <h4>No fue posible conectar con el servidor</h4>
+
+            <p>
+                Verifica tu conexión a Internet o intenta nuevamente más tarde.
+            </p>
+
+            <button
+                className="btn btn-outline-danger"
+                onClick={fetchMascotas}
+            >
+                Reintentar
+            </button>
+
+        </div>
+
+    ) : (
+
+        <MascotasList
+            lista={mascotasList}
+            onDelete={deleteMascotas}
+            onUpdate={updateEstado}
+        />
+
+    )
+}
 
             <Outlet />
             
