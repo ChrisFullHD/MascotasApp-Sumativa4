@@ -46,13 +46,14 @@ function ComentariosForm({ mascotaID, onComentarioAgregado }) {
         }
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="mt-3">
             <h3>Agregar Comentario</h3>
 
             <div>
                 <label>Autor</label>
 
                 <input 
+                    className="form-control"
                     type="text"
                     value={autor}
                     onChange={(e) => setAutor(e.target.value)}
@@ -63,6 +64,8 @@ function ComentariosForm({ mascotaID, onComentarioAgregado }) {
                 <label>Comentario</label>
 
                 <textarea
+                    className="form-control"
+                    rows="3"
                     value={contenido}
                     onChange={(e) => setContenido(e.target.value)}
                 />
@@ -74,7 +77,7 @@ function ComentariosForm({ mascotaID, onComentarioAgregado }) {
                 </div>
             )}
 
-            <button type="submit">
+            <button type="submit" className="btn btn-success">
                 Agregar Comentario
             </button>
         </form>

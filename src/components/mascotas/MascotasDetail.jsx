@@ -8,6 +8,36 @@ function MascotasDetail() {
     const [fetchError, setFetchError] = useState(false);
     const [mascota, setMascota] = useState(null);
     const [mensajeError, setMensajeError] = useState("");
+    const [estados, setEstados] = useState([]);
+
+    const fetchChoices = async () => {
+        try {
+            const response = await mascotasApi.get("choices/")
+            setEstados(response.data.estado)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const obtenerLabelEstado = (valorEstado) => {
+        const estado = estados.find((e) => e.value === valorEstado)
+        return estado ? estado.label : valorEstado
+    }
+
+    const obtenerColorEstado = (estado) => {
+        switch (estado) {
+            case "adoptada":
+                return "success";
+            case "en_adoption":
+                return "primary";
+            case "encontrada":
+                return "warning";
+            case "perdida":
+                return "danger";
+            default:
+                return "secondary";
+        }
+    }
 
     const fetchMascotaDetail = async () => {
         try {
@@ -30,6 +60,7 @@ function MascotasDetail() {
 
     useEffect(() => {
         fetchMascotaDetail();
+        fetchChoices();
     }, []);
 
     const eliminarComentario = async (comentarioID) => {
@@ -59,7 +90,6 @@ function MascotasDetail() {
     }
     return (
         <div>
-
             {mensajeError && (
                 <div className="alert alert-danger">
                     {mensajeError}
@@ -70,7 +100,7 @@ function MascotasDetail() {
                 <p>404 - Mascota no encontrada</p>
             ) : (
                 <>
-                    <div className="container mt-4">
+                    <div className="container py-4">
                         <div className="card shadow-lg border-0">
                             <div className="row g-0">
                                 <div className="col-md-5">
@@ -84,8 +114,8 @@ function MascotasDetail() {
                                         <h2 className="card-title">
                                             {mascota?.nombre}
                                         </h2>
-                                        <span className="badge bg-success mb-3">
-                                            {mascota?.estado}
+                                        <span className={`badge bg-${obtenerColorEstado(mascota?.estado)} mb-3`}>
+                                            {obtenerLabelEstado(mascota?.estado)}
                                         </span>
                                         <p className="card-text">
                                             {mascota?.descripcion}
@@ -115,25 +145,25 @@ function MascotasDetail() {
                             </div>
                         </div>
                     </div>
-
-                    <div className="mt-5">
-                        <ComentariosList
-                            comentarios={mascota?.comentarios}
-                            onEliminarComentario={eliminarComentario}
-                            onComentarioActualizado={fetchMascotaDetail}
-                        />
+                    <div className="container py-4">
+                        <div className="row justify-content-center">
+                                <div className="col-lg-10">
+                                    <ComentariosForm
+                                        mascotaID={id}
+                                        onComentarioAgregado={fetchMascotaDetail}
+                                    />
+                                </div>
+                        </div>
                     </div>
 
-                    <div className="card shadow-sm mt-4">
-                        <div className="card-body">
-                            <h4 className="mb-3">
-                                Agregar Comentario
-                            </h4>
-
-                            <ComentariosForm
-                                mascotaID={id}
-                                onComentarioAgregado={fetchMascotaDetail}
-                            />
+                    <div className="container py-4">
+                        <div className="row justify-content-center">
+                            <div className="col-lg-10">
+                                    <ComentariosList
+                                    comentarios={mascota?.comentarios}
+                                    onEliminarComentario={eliminarComentario}
+                                    onComentarioActualizado={fetchMascotaDetail}/>
+                            </div>
                         </div>
                     </div>
                 </>
